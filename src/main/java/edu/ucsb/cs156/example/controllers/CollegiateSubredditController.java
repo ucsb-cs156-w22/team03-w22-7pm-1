@@ -1,9 +1,9 @@
-package edu.ucsb.cs156.team02.controllers;
+package edu.ucsb.cs156.team03.controllers;
 
-import edu.ucsb.cs156.team02.entities.CollegiateSubreddit;
-import edu.ucsb.cs156.team02.entities.User;
-import edu.ucsb.cs156.team02.models.CurrentUser;
-import edu.ucsb.cs156.team02.repositories.CollegiateSubredditRepository;
+import edu.ucsb.cs156.team03.entities.CollegiateSubreddit;
+import edu.ucsb.cs156.team03.entities.User;
+import edu.ucsb.cs156.team03.models.CurrentUser;
+import edu.ucsb.cs156.team03.repositories.CollegiateSubredditRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -55,10 +55,9 @@ public class CollegiateSubredditController extends ApiController {
     @Autowired
     ObjectMapper mapper;
 
-
-//task 2 - GET list all
+    // task 2 - GET list all
     @ApiOperation(value = "List this user's collegiate subreddits")
-    //@PreAuthorize("hasRole('ROLE_USER')") comment out for now -noah
+    // @PreAuthorize("hasRole('ROLE_USER')") comment out for now -noah
     @GetMapping("/all")
     public Iterable<CollegiateSubreddit> thisUsersCollegiateSubreddits() {
         loggingService.logMethod();
@@ -66,9 +65,9 @@ public class CollegiateSubredditController extends ApiController {
         return colSubs;
     }
 
-    //task 2 - POST a new
+    // task 2 - POST a new
     @ApiOperation(value = "Create a new CollegiateSubreddit")
-    //@PreAuthorize("hasRole('ROLE_USER')") comment out for now -noah
+    // @PreAuthorize("hasRole('ROLE_USER')") comment out for now -noah
     @PostMapping("/post")
     public CollegiateSubreddit postCollegiateSubreddit(
             @ApiParam("name") @RequestParam String name,
@@ -86,7 +85,7 @@ public class CollegiateSubredditController extends ApiController {
         return savedCollegiateSubreddit;
     }
 
-    //get single sub by id GET
+    // get single sub by id GET
     @ApiOperation(value = "Get a single collegiate subreddit by id")
     @GetMapping("")
     public ResponseEntity<String> getCollegiateSubredditById(
@@ -96,26 +95,27 @@ public class CollegiateSubredditController extends ApiController {
         loggingService.logMethod();
 
         toe = doesCollegiateSubredditExist(toe);
-        
+
         if (toe.error != null) {
             return toe.error;
         }
-        /*toe = doesCollegiateSubredditBelongToCurrentUser(toe); //dont need user stuff
-        if (toe.error != null) {
-            return toe.error; 
-        }*/
+        /*
+         * toe = doesCollegiateSubredditBelongToCurrentUser(toe); //dont need user stuff
+         * if (toe.error != null) {
+         * return toe.error;
+         * }
+         */
         String body = mapper.writeValueAsString(toe.colSub);
         return ResponseEntity.ok().body(body);
     }
 
-    
-    //PUT function for single endpoint
+    // PUT function for single endpoint
     @ApiOperation(value = "Update a single Subbreddit")
     @PutMapping("")
     public ResponseEntity<String> putCollegiateSubredditById(
             @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid CollegiateSubreddit incomingCollegiateSubreddit) throws JsonProcessingException {
-            
+
         loggingService.logMethod();
 
         CollegiateSubredditOrError toe = new CollegiateSubredditOrError(id);
@@ -130,13 +130,12 @@ public class CollegiateSubredditController extends ApiController {
         colSub.setLocation(incomingCollegiateSubreddit.getLocation());
         colSub.setSubreddit(incomingCollegiateSubreddit.getSubreddit());
 
-
         colSubRepository.save(colSub);
         String body = mapper.writeValueAsString(colSub);
         return ResponseEntity.ok().body(body);
     }
 
-    //delete subreddit
+    // delete subreddit
     @ApiOperation(value = "Delete a CollegiateSubreddit")
     @DeleteMapping("")
     public ResponseEntity<String> deleteCollegiateSubreddit(
@@ -151,7 +150,6 @@ public class CollegiateSubredditController extends ApiController {
         return ResponseEntity.ok().body(String.format("collegiate subreddit with id %d deleted", id));
 
     }
-
 
     /**
      * Pre-conditions: toe.id is value to look up, toe.todo and toe.error are null
@@ -176,29 +174,30 @@ public class CollegiateSubredditController extends ApiController {
         return toe;
     }
 
-/*
-    
+    /*
+     * 
      * Pre-conditions: toe.todo is non-null and refers to the todo with id toe.id,
      * and toe.error is null
      *
      * Post-condition: if todo belongs to current user, then error is still null.
      * Otherwise error is a suitable
      * return value.
-    
-    public CollegiateSubredditOrError doesCollegiateSubredditBelongToCurrentUser(CollegiateSubredditOrError toe) {
-        CurrentUser currentUser = getCurrentUser();
-        log.info("currentUser={}", currentUser);
-
-        Long currentUserId = currentUser.getUser().getId();
-        Long colSubUserId = toe.colSub.getUser().getId();
-        log.info("currentUserId={} colSubUserId={}", currentUserId, colSubUserId);
-
-        if (colSubUserId != currentUserId) {
-            toe.error = ResponseEntity
-                    .badRequest()
-                    .body(String.format("Collegiate subreddit with id %d not found", toe.id));
-        }
-        return toe;
-    }
-*/
+     * 
+     * public CollegiateSubredditOrError
+     * doesCollegiateSubredditBelongToCurrentUser(CollegiateSubredditOrError toe) {
+     * CurrentUser currentUser = getCurrentUser();
+     * log.info("currentUser={}", currentUser);
+     * 
+     * Long currentUserId = currentUser.getUser().getId();
+     * Long colSubUserId = toe.colSub.getUser().getId();
+     * log.info("currentUserId={} colSubUserId={}", currentUserId, colSubUserId);
+     * 
+     * if (colSubUserId != currentUserId) {
+     * toe.error = ResponseEntity
+     * .badRequest()
+     * .body(String.format("Collegiate subreddit with id %d not found", toe.id));
+     * }
+     * return toe;
+     * }
+     */
 }

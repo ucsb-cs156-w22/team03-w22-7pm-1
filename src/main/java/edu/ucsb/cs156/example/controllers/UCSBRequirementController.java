@@ -1,9 +1,9 @@
-package edu.ucsb.cs156.team02.controllers;
+package edu.ucsb.cs156.team03.controllers;
 
-import edu.ucsb.cs156.team02.entities.UCSBRequirement;
-import edu.ucsb.cs156.team02.entities.User;
-import edu.ucsb.cs156.team02.models.CurrentUser;
-import edu.ucsb.cs156.team02.repositories.UCSBRequirementRepository;
+import edu.ucsb.cs156.team03.entities.UCSBRequirement;
+import edu.ucsb.cs156.team03.entities.User;
+import edu.ucsb.cs156.team03.models.CurrentUser;
+import edu.ucsb.cs156.team03.repositories.UCSBRequirementRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -100,13 +100,12 @@ public class UCSBRequirementController extends ApiController {
 
         roe = doesUCSBRequirementExist(roe);
         if (roe.error != null) {
-            //System.out.printf("id 123 not found");
+            // System.out.printf("id 123 not found");
             return roe.error;
         }
         String body = mapper.writeValueAsString(roe.ucsbRe);
         return ResponseEntity.ok().body(body);
     }
-
 
     public UCSBRequirementOrError doesUCSBRequirementExist(UCSBRequirementOrError roe) {
 
@@ -121,7 +120,7 @@ public class UCSBRequirementController extends ApiController {
         }
         return roe;
     }
-    //new adding 
+    // new adding
 
     @ApiOperation(value = "Delete a UCSBRequirment owned by this user")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -134,28 +133,26 @@ public class UCSBRequirementController extends ApiController {
 
         roe = doesUCSBRequirementExist(roe);
         if (roe.error != null) {
-           return roe.error;
+            return roe.error;
         }
 
-    //this part may need to change 
+        // this part may need to change
 
-   
         ucsbRequirementRepository.deleteById(id);
         return ResponseEntity.ok().body(String.format("UCSB Requirment with id %d deleted", id));
 
-}
+    }
 
-//***************************************   PUT  *********************************** */
+    // *************************************** PUT
+    // *********************************** */
 
-@ApiOperation(value = "Update a single UCSB Requirment ")
+    @ApiOperation(value = "Update a single UCSB Requirment ")
     @PreAuthorize("hasRole('ROLE_USER')")
     @PutMapping("")
     public ResponseEntity<String> putUCSBRequirmentById(
-            @ApiParam("id") @RequestParam Long id ,
-            @RequestBody @Valid UCSBRequirement incomingUCSBReuirement) throws JsonProcessingException{
+            @ApiParam("id") @RequestParam Long id,
+            @RequestBody @Valid UCSBRequirement incomingUCSBReuirement) throws JsonProcessingException {
         loggingService.logMethod();
-
-                
 
         UCSBRequirementOrError roe = new UCSBRequirementOrError(id);
 
@@ -163,22 +160,14 @@ public class UCSBRequirementController extends ApiController {
         if (roe.error != null) {
             return roe.error;
         }
- 
 
-        //we need to changes this if we save the date more then one time code is in ADMIN
+        // we need to changes this if we save the date more then one time code is in
+        // ADMIN
         incomingUCSBReuirement.setId(id);
         ucsbRequirementRepository.save(incomingUCSBReuirement);
-        
-        
 
         String body = mapper.writeValueAsString(incomingUCSBReuirement);
         return ResponseEntity.ok().body(body);
     }
 
-
-
-
 }
-
-
-

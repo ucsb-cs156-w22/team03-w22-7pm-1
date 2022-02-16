@@ -1,10 +1,10 @@
-package edu.ucsb.cs156.team02.controllers;
+package edu.ucsb.cs156.team03.controllers;
 
-import edu.ucsb.cs156.team02.entities.Todo;
-import edu.ucsb.cs156.team02.entities.UCSBSubject;
-import edu.ucsb.cs156.team02.entities.User;
-import edu.ucsb.cs156.team02.models.CurrentUser;
-import edu.ucsb.cs156.team02.repositories.UCSBSubjectRepository;
+import edu.ucsb.cs156.team03.entities.Todo;
+import edu.ucsb.cs156.team03.entities.UCSBSubject;
+import edu.ucsb.cs156.team03.entities.User;
+import edu.ucsb.cs156.team03.models.CurrentUser;
+import edu.ucsb.cs156.team03.repositories.UCSBSubjectRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
