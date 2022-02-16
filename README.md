@@ -1,3 +1,4 @@
+[![codecov](https://codecov.io/gh/ucsb-cs156-w22/team03-w22-7pm-1/branch/main/graph/badge.svg?token=pqNbKBnulx)](https://codecov.io/gh/ucsb-cs156-w22/team03-w22-7pm-1)
 # demo-spring-react-example-v2: dsre-v2
 
 Heroku deployment is here:
