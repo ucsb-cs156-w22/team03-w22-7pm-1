@@ -4,7 +4,7 @@ export default function UCSBSubjectsCreatePage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Todos</h1>
+        <h1>UCSBSubjects</h1>
         <p>
           This is where the create page will go
         </p>

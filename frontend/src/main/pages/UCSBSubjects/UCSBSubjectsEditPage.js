@@ -4,7 +4,7 @@ export default function UCSBSubjectsEditPage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>Todos</h1>
+        <h1>UCSBSubjects</h1>
         <p>
           This is where the edit page will go
         </p>
