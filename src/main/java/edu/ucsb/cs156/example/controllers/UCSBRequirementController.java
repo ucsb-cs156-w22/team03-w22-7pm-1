@@ -1,9 +1,9 @@
-package edu.ucsb.cs156.team03.controllers;
+package edu.ucsb.cs156.example.controllers;
 
-import edu.ucsb.cs156.team03.entities.UCSBRequirement;
-import edu.ucsb.cs156.team03.entities.User;
-import edu.ucsb.cs156.team03.models.CurrentUser;
-import edu.ucsb.cs156.team03.repositories.UCSBRequirementRepository;
+import edu.ucsb.cs156.example.entities.UCSBRequirement;
+import edu.ucsb.cs156.example.entities.User;
+import edu.ucsb.cs156.example.models.CurrentUser;
+import edu.ucsb.cs156.example.repositories.UCSBRequirementRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -60,7 +60,7 @@ public class UCSBRequirementController extends ApiController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
     public Iterable<UCSBRequirement> allUsersUCSBRequirements() {
-        loggingService.logMethod();
+        //loggingService.logMethod();
         Iterable<UCSBRequirement> requirements = ucsbRequirementRepository.findAll();
         return requirements;
     }
@@ -76,7 +76,7 @@ public class UCSBRequirementController extends ApiController {
             @ApiParam("courseCount") @RequestParam int courseCount,
             @ApiParam("units") @RequestParam int units,
             @ApiParam("inactive") @RequestParam boolean inactive) {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBRequirement ucsbReq = new UCSBRequirement();
         ucsbReq.setRequirementCode(requirementCode);
@@ -95,7 +95,7 @@ public class UCSBRequirementController extends ApiController {
     @GetMapping("")
     public ResponseEntity<String> getUCSBRequirementById(
             @ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
-        loggingService.logMethod();
+        //loggingService.logMethod();
         UCSBRequirementOrError roe = new UCSBRequirementOrError(id);
 
         roe = doesUCSBRequirementExist(roe);
@@ -127,7 +127,7 @@ public class UCSBRequirementController extends ApiController {
     @DeleteMapping("")
     public ResponseEntity<String> deleteUCSBRequirement(
             @ApiParam("id") @RequestParam Long id) {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBRequirementOrError roe = new UCSBRequirementOrError(id);
 
@@ -152,7 +152,7 @@ public class UCSBRequirementController extends ApiController {
     public ResponseEntity<String> putUCSBRequirmentById(
             @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid UCSBRequirement incomingUCSBReuirement) throws JsonProcessingException {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBRequirementOrError roe = new UCSBRequirementOrError(id);
 

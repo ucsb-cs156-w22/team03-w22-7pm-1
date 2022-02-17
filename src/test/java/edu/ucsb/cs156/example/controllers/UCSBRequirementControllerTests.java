@@ -1,11 +1,11 @@
-package edu.ucsb.cs156.team03.controllers;
+package edu.ucsb.cs156.example.controllers;
 
-import edu.ucsb.cs156.team03.repositories.UserRepository;
-import edu.ucsb.cs156.team03.testconfig.TestConfig;
-import edu.ucsb.cs156.team03.ControllerTestCase;
-import edu.ucsb.cs156.team03.entities.UCSBRequirement;
-import edu.ucsb.cs156.team03.entities.User;
-import edu.ucsb.cs156.team03.repositories.UCSBRequirementRepository;
+import edu.ucsb.cs156.example.repositories.UserRepository;
+import edu.ucsb.cs156.example.testconfig.TestConfig;
+import edu.ucsb.cs156.example.ControllerTestCase;
+import edu.ucsb.cs156.example.entities.UCSBRequirement;
+import edu.ucsb.cs156.example.entities.User;
+import edu.ucsb.cs156.example.repositories.UCSBRequirementRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

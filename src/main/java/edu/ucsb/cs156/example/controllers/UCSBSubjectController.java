@@ -1,10 +1,10 @@
-package edu.ucsb.cs156.team03.controllers;
+package edu.ucsb.cs156.example.controllers;
 
-import edu.ucsb.cs156.team03.entities.Todo;
-import edu.ucsb.cs156.team03.entities.UCSBSubject;
-import edu.ucsb.cs156.team03.entities.User;
-import edu.ucsb.cs156.team03.models.CurrentUser;
-import edu.ucsb.cs156.team03.repositories.UCSBSubjectRepository;
+import edu.ucsb.cs156.example.entities.Todo;
+import edu.ucsb.cs156.example.entities.UCSBSubject;
+import edu.ucsb.cs156.example.entities.User;
+import edu.ucsb.cs156.example.models.CurrentUser;
+import edu.ucsb.cs156.example.repositories.UCSBSubjectRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -54,7 +54,7 @@ public class UCSBSubjectController extends ApiController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
     public Iterable<UCSBSubject> allUCSBSubjects() {
-        loggingService.logMethod();
+        //loggingService.logMethod();
         Iterable<UCSBSubject> UCSBSubjects = ucsbSubjectRepository.findAll();
         return UCSBSubjects;
     }
@@ -69,7 +69,7 @@ public class UCSBSubjectController extends ApiController {
             @ApiParam("collegeCode") @RequestParam String collegeCode,
             @ApiParam("relatedDeptCode") @RequestParam String relatedDeptCode,
             @ApiParam("inactive") @RequestParam Boolean inactive) {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         log.info(
                 "UCSB subject /post called: subjectCode={}, subjectTranslation={}, "
@@ -95,7 +95,7 @@ public class UCSBSubjectController extends ApiController {
     @GetMapping("")
     public ResponseEntity<String> getUCSBSubjectById(
             @ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
-        loggingService.logMethod();
+        //loggingService.logMethod();
         UCSBSubjectOrError roe = new UCSBSubjectOrError(id);
 
         roe = doesUCSBSubjectExist(roe);
@@ -128,7 +128,7 @@ public class UCSBSubjectController extends ApiController {
     public ResponseEntity<String> putUCSBSubjectID(
             @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid UCSBSubject incomingUCSBSubject) throws JsonProcessingException {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         // CurrentUser currentUser = getCurrentUser();
         // User user = currentUser.getUser(); (EX: I DONT THINK WE HAVE A USER ???)
@@ -157,7 +157,7 @@ public class UCSBSubjectController extends ApiController {
     @DeleteMapping("")
     public ResponseEntity<String> deleteUCSBSubject(
             @ApiParam("id") @RequestParam Long id) {
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         UCSBSubjectOrError roe = new UCSBSubjectOrError(id);
 

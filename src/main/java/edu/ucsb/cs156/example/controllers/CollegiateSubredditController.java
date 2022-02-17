@@ -1,9 +1,9 @@
-package edu.ucsb.cs156.team03.controllers;
+package edu.ucsb.cs156.example.controllers;
 
-import edu.ucsb.cs156.team03.entities.CollegiateSubreddit;
-import edu.ucsb.cs156.team03.entities.User;
-import edu.ucsb.cs156.team03.models.CurrentUser;
-import edu.ucsb.cs156.team03.repositories.CollegiateSubredditRepository;
+import edu.ucsb.cs156.example.entities.CollegiateSubreddit;
+import edu.ucsb.cs156.example.entities.User;
+import edu.ucsb.cs156.example.models.CurrentUser;
+import edu.ucsb.cs156.example.repositories.CollegiateSubredditRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -60,7 +60,7 @@ public class CollegiateSubredditController extends ApiController {
     // @PreAuthorize("hasRole('ROLE_USER')") comment out for now -noah
     @GetMapping("/all")
     public Iterable<CollegiateSubreddit> thisUsersCollegiateSubreddits() {
-        loggingService.logMethod();
+        //loggingService.logMethod();
         Iterable<CollegiateSubreddit> colSubs = colSubRepository.findAll();
         return colSubs;
     }
@@ -74,7 +74,7 @@ public class CollegiateSubredditController extends ApiController {
             @ApiParam("location") @RequestParam String location,
             @ApiParam("subreddit") @RequestParam String subreddit) {
 
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         CollegiateSubreddit colSub = new CollegiateSubreddit();
         colSub.setName(name);
@@ -92,7 +92,7 @@ public class CollegiateSubredditController extends ApiController {
             @ApiParam("id") @RequestParam Long id) throws JsonProcessingException {
         CollegiateSubredditOrError toe = new CollegiateSubredditOrError(id);
 
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         toe = doesCollegiateSubredditExist(toe);
 
@@ -116,7 +116,7 @@ public class CollegiateSubredditController extends ApiController {
             @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid CollegiateSubreddit incomingCollegiateSubreddit) throws JsonProcessingException {
 
-        loggingService.logMethod();
+        //loggingService.logMethod();
 
         CollegiateSubredditOrError toe = new CollegiateSubredditOrError(id);
 
