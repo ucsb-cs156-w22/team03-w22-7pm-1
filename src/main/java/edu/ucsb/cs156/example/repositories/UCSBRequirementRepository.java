@@ -1,7 +1,7 @@
-package edu.ucsb.cs156.team02.repositories;
+package edu.ucsb.cs156.example.repositories;
 
 //import edu.ucsb.cs156.team02.entities.Todo;
-import edu.ucsb.cs156.team02.entities.UCSBRequirement;
+import edu.ucsb.cs156.example.entities.UCSBRequirement;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
