@@ -6,7 +6,7 @@ const ucsbSubjectsFixtures = {
         "deptCode": "ENGR",
         "collegeCode": "UCSB",     //EX: IDK WHAT TO PUT FOR THESE "DUNNO"'S
         "relatedDeptCode": "DUNNO",
-        "inactive": "false"
+        "inactive": false
     },
     threeSubjects: [
         {
@@ -25,7 +25,7 @@ const ucsbSubjectsFixtures = {
             "deptCode": "L&S",
             "collegeCode": "UCSB",
             "relatedDeptCode": "DUNNO",
-            "inactive": "false"
+            "inactive": false
         },
         {
             "id": 3,
@@ -34,7 +34,7 @@ const ucsbSubjectsFixtures = {
             "deptCode": "L&S",
             "collegeCode": "UCSB",
             "relatedDeptCode": "DUNNO",
-            "inactive": "false"
+            "inactive": false
         }
     ]
 };
