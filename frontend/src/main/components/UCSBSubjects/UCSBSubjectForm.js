@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 
-function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create" }) {
+function UCSBSubjectsForm({initialUCSBSubjects, submitAction, buttonLabel="Create" }) {
 
     // Stryker disable all
     const {
@@ -12,7 +12,7 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create
         formState: { errors },
         handleSubmit,
     } = useForm(
-        { defaultValues: initialUCSBSubject || {}, }
+        { defaultValues: initialUCSBSubjects || {}, }
     );
     // Stryker enable all
 
@@ -22,86 +22,135 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create
     // Note that even this complex regex may still need some tweaks
 
     // Stryker disable next-line Regex
-    const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+    // const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
     // Stryker disable next-line all
-    const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
-    
-    //EX: I stopped here I need to continue editing this...
+    // const yyyyq_regex = /((19)|(20))\d{2}[1-4]/i; // Accepts from 1900-2099 followed by 1-4.  Close enough.
+
     return (
 
         <Form onSubmit={handleSubmit(submitAction)}>
 
-            {initialUCSBSubject && (
+            {/* id */}
+            {initialUCSBSubjects && (
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="id">Id</Form.Label>
                     <Form.Control
-                        data-testid="UCSBSubjectForm-id"
+                        data-testid="UCSBSubjectsForm-id"
                         id="id"
                         type="text"
                         {...register("id")}
-                        value={initialUCSBSubject.id}
+                        value={initialUCSBSubjects.id}
                         disabled
                     />
                 </Form.Group>
             )}
-             
+
+            {/* subjectCode */}
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="quarterYYYYQ">Quarter YYYYQ</Form.Label>
+                <Form.Label htmlFor="subjectCode">Subject Code</Form.Label>
                 <Form.Control
-                    data-testid="UCSBDateForm-quarterYYYYQ"
-                    id="quarterYYYYQ"
+                    data-testid="UCSBSubjectsForm-subjectCode"
+                    id="subjectCode"
                     type="text"
-                    isInvalid={Boolean(errors.quarterYYYYQ)}
-                    {...register("quarterYYYYQ", { required: true, pattern: yyyyq_regex })}
+                    isInvalid={Boolean(errors.subjectCode)}
+                    {...register("subjectCode", { required: "Subject Code is required." })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.quarterYYYYQ && 'QuarterYYYYQ is required. '}
-                    {errors.quarterYYYYQ?.type === 'pattern' && 'QuarterYYYYQ must be in the format YYYYQ, e.g. 20224 for Fall 2022'}
+                    {errors.subjectCode?.message} 
                 </Form.Control.Feedback>
             </Form.Group>
 
+
+            {/* subjectTranslation */}
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="name">Name</Form.Label>
+                <Form.Label htmlFor="subjectTranslation">Subject Translation</Form.Label>
                 <Form.Control
-                    data-testid="UCSBDateForm-name"
-                    id="name"
+                    data-testid="UCSBSubjectsForm-subjectTranslation"
+                    id="subjectTranslation"
                     type="text"
-                    isInvalid={Boolean(errors.name)}
-                    {...register("name", {
-                        required: "Name is required."
+                    isInvalid={Boolean(errors.subjectTranslation)}
+                    {...register("subjectTranslation", {
+                        required: "Subject Translation is required."
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.name?.message}
+                    {errors.subjectTranslation?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 
+            {/* deptCode */}
             <Form.Group className="mb-3" >
-                <Form.Label htmlFor="localDateTime">Date (iso format)</Form.Label>
+                <Form.Label htmlFor="deptCode">Department Code</Form.Label>
                 <Form.Control
-                    data-testid="UCSBDateForm-localDateTime"
-                    id="localDateTime"
+                    data-testid="UCSBSubjectsForm-deptCode"
+                    id="deptCode"
                     type="text"
-                    isInvalid={Boolean(errors.localDateTime)}
-                    {...register("localDateTime", { required: true, pattern: isodate_regex })}
+                    isInvalid={Boolean(errors.deptCode)}
+                    {...register("deptCode", { required:  "Department Code is required."})}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.localDateTime && 'LocalDateTime is required. '}
-                    {errors.localDateTime?.type === 'pattern' && 'localDateTime must be in ISO format, e.g. 2022-01-02T15:30'}
+                    {errors.deptCode?.message} 
                 </Form.Control.Feedback>
             </Form.Group>
+
+
+             {/* collegeCode */}
+             <Form.Group className="mb-3" >
+                <Form.Label htmlFor="collegeCode">College Code</Form.Label>
+                <Form.Control
+                    data-testid="UCSBSubjectsForm-collegeCode"
+                    id="collegeCode"
+                    type="text"
+                    isInvalid={Boolean(errors.collegeCode)}
+                    {...register("collegeCode", { required:  "CollegeCode Code is required."})}
+                />
+                <Form.Control.Feedback type="invalid">
+                    {errors.collegeCode?.message} 
+                </Form.Control.Feedback>
+            </Form.Group>
+
+            {/* relatedDeptCode */}
+            <Form.Group className="mb-3" >
+                <Form.Label htmlFor="relatedDeptCode">Related Department Code</Form.Label>
+                <Form.Control
+                    data-testid="UCSBSubjectsForm-relatedDeptCode"
+                    id="relatedDeptCode"
+                    type="text"
+                    isInvalid={Boolean(errors.relatedDeptCode)}
+                    {...register("relatedDeptCode", { required:  "Related Department Code is required."})}
+                />
+                <Form.Control.Feedback type="invalid">
+                    {errors.relatedDeptCode?.message} 
+                </Form.Control.Feedback>
+            </Form.Group>
+
+             {/* inactive */}
+             <Form.Group className="mb-3" >
+                <Form.Label htmlFor="inactive">Inactive</Form.Label>
+                <Form.Control
+                    data-testid="UCSBSubjectsForm-inactive"
+                    id="inactive"
+                    type="text"
+                    isInvalid={Boolean(errors.inactive)}
+                    {...register("inactive", { required:  "Inactive is required."})}
+                />
+                <Form.Control.Feedback type="invalid">
+                    {errors.inactive?.message} 
+                </Form.Control.Feedback>
+            </Form.Group>
+            
 
             <Button
                 type="submit"
-                data-testid="UCSBDateForm-submit"
+                data-testid="UCSBSubjectsForm-submit"
             >
                 {buttonLabel}
             </Button>
             <Button
                 variant="Secondary"
                 onClick={() => navigate(-1)}
-                data-testid="UCSBDateForm-cancel"
+                data-testid="UCSBSubjectsForm-cancel"
             >
                 Cancel
             </Button>
@@ -111,4 +160,4 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create
     )
 }
 
-export default UCSBSubjectForm;
+export default UCSBSubjectsForm;
