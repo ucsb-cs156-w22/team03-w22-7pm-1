@@ -76,7 +76,7 @@ describe("UCSBSubjectsEditPage tests", () => {
                 deptCode: "ENGR",
                 collegeCode: "UCSB",
                 relatedDeptCode: "DUNNO",
-                inactive: false
+                inactive: "false"
             });
             axiosMock.onPut('/api/UCSBSubjects').reply(200, {
                 id: 17,
@@ -85,7 +85,7 @@ describe("UCSBSubjectsEditPage tests", () => {
                 deptCode: "L&S",
                 collegeCode: "UCSB",
                 relatedDeptCode: "DUNNO",
-                inactive: false
+                inactive: "false"
             });
         });
 
@@ -110,7 +110,7 @@ describe("UCSBSubjectsEditPage tests", () => {
                 </QueryClientProvider>
             );
 
-            await waitFor(() => expect(getByTestId("UCSBSubjectForm-subjectCode")).toBeInTheDocument());
+            await waitFor(() => expect(getByTestId("UCSBSubjectForm-id")).toBeInTheDocument());
                 
             const idField = getByTestId("UCSBSubjectForm-id");
             const subjectCodeField = getByTestId("UCSBSubjectForm-subjectCode");
@@ -143,7 +143,7 @@ describe("UCSBSubjectsEditPage tests", () => {
                 </QueryClientProvider>
             );
 
-            await waitFor(() => expect(getByTestId("UCSBSubjectForm-subjectCode")).toBeInTheDocument());
+            await waitFor(() => expect(getByTestId("UCSBSubjectForm-id")).toBeInTheDocument());
 
             const idField = getByTestId("UCSBSubjectForm-id");
             const subjectCodeField = getByTestId("UCSBSubjectForm-subjectCode");
@@ -169,7 +169,7 @@ describe("UCSBSubjectsEditPage tests", () => {
             fireEvent.change(deptCodeField, { target: { value: "ENGR" } })
             fireEvent.change(collegeCodeField,{ target: { value: "UCSB" } })
             fireEvent.change(relatedDeptCodeField,{ target: { value: "DUNNO" } })
-            fireEvent.change(inactiveField,{ target: { value: false } })
+            fireEvent.change(inactiveField,{ target: { value: "false" } })
 
             fireEvent.click(submitButton);
 
@@ -177,7 +177,7 @@ describe("UCSBSubjectsEditPage tests", () => {
             expect(mockToast).toBeCalledWith("UCSBSubject Updated - id: 17 subject code: CMPSC"); 
             expect(mockNavigate).toBeCalledWith({ "to": "/ucsbsubjects/list" });
 
-            expect(axiosMock.history.put.length).toBe(1); // times called
+            expect(axiosMock.history.put.length).toBe(1); 
             expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
                 subjectCode: "CMPSC",
@@ -185,8 +185,8 @@ describe("UCSBSubjectsEditPage tests", () => {
                 deptCode: "ENGR",
                 collegeCode: "UCSB",
                 relatedDeptCode: "DUNNO",
-                inactive: false
-            })); // posted object
+                inactive: "false"
+            })); 
 
         });
 

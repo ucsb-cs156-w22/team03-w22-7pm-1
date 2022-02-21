@@ -1,127 +1,143 @@
-import { render, waitFor, fireEvent } from "@testing-library/react";
-import UCSBSubjectForm from "main/components/UCSBSubjects/UCSBSubjectForm";
-import { ucsbSubjectsFixtures } from "fixtures/ucsbSubjectsFixtures";
-import { BrowserRouter as Router } from "react-router-dom";
+import { render, waitFor, fireEvent } from '@testing-library/react';
+import UCSBSubjectForm from 'main/components/UCSBSubjects/UCSBSubjectForm';
+import { subjectFixtures } from 'fixtures/ucsbSubjectsFixtures';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const mockedNavigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'),
-    useNavigate: () => mockedNavigate
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedNavigate,
 }));
 
+describe('UCSBSubjectForm tests', () => {
+  test('renders correctly ', async () => {
+    const { getByText } = render(
+      <Router> 
+        <UCSBSubjectForm />
+      </Router>
+    );
+    // await waitFor(() => expect(getByText(/Quarter YYYYQ/)).toBeInTheDocument());
+    await waitFor(() => expect(getByText(/Create/)).toBeInTheDocument());
+  });
 
-describe("UCSBSubjectForm tests", () => {
+  test('renders correctly when passing in a UCSBSubject ', async () => {
+    const { getByText, getByTestId } = render(
+      <Router>
+        <UCSBSubjectForm initialUCSBSubject={subjectFixtures.oneSubject} />
+      </Router>
+    );
+    await waitFor(() =>
+      expect(getByTestId(/UCSBSubjectForm-id/)).toBeInTheDocument()
+    );
+    expect(getByText(/Id/)).toBeInTheDocument();
+    expect(getByTestId(/UCSBSubjectForm-id/)).toHaveValue('1');
+  });
+  /**
+  test('Correct Error messsages on bad input', async () => {
+    const { getByTestId, getByText } = render(
+      <Router>
+        <UCSBSubjectForm />
+      </Router>
+    );
+    await waitFor(() =>
+      expect(getByTestId('UCSBSubjectForm-subjectCode')).toBeInTheDocument()
+    );
+    const subjectCodeField = getByTestId('UCSBSubjectForm-subjectCode');
+    const submitButton = getByTestId('UCSBSubjectForm-submit');
+    fireEvent.change(subjectCodeField, { target: { value: 'bad-input' } });
+    fireEvent.click(submitButton);
+    await waitFor(() =>
+      expect(getByText(/subjectCode is required/)).toBeInTheDocument()
+    );
+    expect(getByText(/subjectTranslation is required/)).toBeInTheDocument();
+    expect(getByText(/deptCode is required/)).toBeInTheDocument();
+    expect(getByText(/collegeCode is required/)).toBeInTheDocument();
+    expect(getByText(/relatedDeptCode is required/)).toBeInTheDocument();
+  });
+  */
 
-    test("renders correctly ", async () => {
+  test('Correct Error messsages on missing input', async () => {
+    const { getByTestId, getByText } = render(
+      <Router>
+        <UCSBSubjectForm />
+      </Router>
+    );
+    await waitFor(() =>
+      expect(getByTestId('UCSBSubjectForm-submit')).toBeInTheDocument()
+    );
+    const submitButton = getByTestId('UCSBSubjectForm-submit');
 
-        const { getByText } = render(
-            <Router  >
-                <UCSBSubjectForm />
-            </Router>
-        );
-        await waitFor(() => expect(getByText(/Quarter YYYYQ/)).toBeInTheDocument());
-        await waitFor(() => expect(getByText(/Create/)).toBeInTheDocument());
-    });
+    fireEvent.click(submitButton);
 
+    await waitFor(() =>
+      expect(getByText(/subjectCode is required./)).toBeInTheDocument()
+    );
+    expect(getByText(/subjectTranslation is required./)).toBeInTheDocument();
+    expect(getByText(/deptCode is required./)).toBeInTheDocument();
+    expect(getByText(/collegeCode is required./)).toBeInTheDocument();
+    expect(getByText(/relatedDeptCode is required./)).toBeInTheDocument();
+    expect(getByText(/inactive is required./)).toBeInTheDocument();
 
-    test("renders correctly when passing in a UCSBSubject ", async () => {
+  });
 
-        const { getByText, getByTestId } = render(
-            <Router  >
-                <UCSBSubjectForm initialUCSBSubject={ucsbSubjectsFixtures.oneSubject} />
-            </Router>
-        );
-        await waitFor(() => expect(getByTestId(/UCSBSubjectForm-id/)).toBeInTheDocument());
-        expect(getByText(/Id/)).toBeInTheDocument();
-        expect(getByTestId(/UCSBSubjectForm-id/)).toHaveValue("1");
-    });
+  test('No Error messsages on good input', async () => {
+    const mockSubmitAction = jest.fn();
 
+    const { getByTestId, queryByText } = render(
+      <Router>
+        <UCSBSubjectForm submitAction={mockSubmitAction} />
+      </Router>
+    );
+    await waitFor(() =>
+      expect(getByTestId('UCSBSubjectForm-subjectCode')).toBeInTheDocument()
+    );
 
-    test("Correct Error messsages on bad input", async () => {
+    const subjectCodeField = getByTestId('UCSBSubjectForm-subjectCode');
+    const subjectTranslationField = getByTestId(
+      'UCSBSubjectForm-subjectTranslation'
+    );
+    const deptCodeField = getByTestId('UCSBSubjectForm-deptCode');
+    const collegeCodeField = getByTestId('UCSBSubjectForm-collegeCode');
+    const relatedDeptCodeField = getByTestId('UCSBSubjectForm-relatedDeptCode');
+    const inactiveField = getByTestId('UCSBSubjectForm-inactive');
 
-        const { getByTestId, getByText } = render(
-            <Router  >
-                <UCSBSubjectForm />
-            </Router>
-        );
-        await waitFor(() => expect(getByTestId("UCSBSubjectForm-quarterYYYYQ")).toBeInTheDocument());
-        const quarterYYYYQField = getByTestId("UCSBSubjectForm-quarterYYYYQ");
-        const localSubjectTimeField = getByTestId("UCSBSubjectForm-localSubjectTime");
-        const submitButton = getByTestId("UCSBSubjectForm-submit");
+    const submitButton = getByTestId('UCSBSubjectForm-submit');
 
-        fireEvent.change(quarterYYYYQField, { target: { value: 'bad-input' } });
-        fireEvent.change(localSubjectTimeField, { target: { value: 'bad-input' } });
-        fireEvent.click(submitButton);
+    fireEvent.change(subjectCodeField, { target: { value: 'A' } });
+    fireEvent.change(subjectTranslationField, { target: { value: 'English Language' },});
+    fireEvent.change(deptCodeField, {target: { value: 'English' },});
+    fireEvent.change(collegeCodeField, { target: { value: 'L&S' } });
+    fireEvent.change(relatedDeptCodeField, { target: { value: 'Letters & Sciences' }, });
+    fireEvent.change(inactiveField, { target: { value: false },});
+    fireEvent.click(submitButton);
 
-        await waitFor(() => expect(getByText(/QuarterYYYYQ must be in the format YYYYQ/)).toBeInTheDocument());
-        expect(getByText(/localSubjectTime must be in ISO format/)).toBeInTheDocument();
-    });
+    await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
-    test("Correct Error messsages on missing input", async () => {
+    expect(queryByText(/subjectCode is required./)).not.toBeInTheDocument();
+    expect(
+      queryByText(/subjectTranslation is required./)
+    ).not.toBeInTheDocument();
+    expect(queryByText(/deptCode is required./)).not.toBeInTheDocument();
+    expect(queryByText(/collegeCode is required./)).not.toBeInTheDocument();
+    expect(queryByText(/relatedDeptCode is required./)).not.toBeInTheDocument();
+    expect(queryByText(/inactive is required./)).not.toBeInTheDocument();
 
-        const { getByTestId, getByText } = render(
-            <Router  >
-                <UCSBSubjectForm />
-            </Router>
-        );
-        await waitFor(() => expect(getByTestId("UCSBSubjectForm-submit")).toBeInTheDocument());
-        const submitButton = getByTestId("UCSBSubjectForm-submit");
+  });
 
-        fireEvent.click(submitButton);
+  test('Test that navigate(-1) is called when Cancel is clicked', async () => {
+    const { getByTestId } = render(
+      <Router>
+        <UCSBSubjectForm />
+      </Router>
+    );
+    await waitFor(() =>
+      expect(getByTestId('UCSBSubjectForm-cancel')).toBeInTheDocument()
+    );
+    const cancelButton = getByTestId('UCSBSubjectForm-cancel');
 
-        await waitFor(() => expect(getByText(/QuarterYYYYQ is required./)).toBeInTheDocument());
-        expect(getByText(/Name is required./)).toBeInTheDocument();
-        expect(getByText(/LocalSubjectTime is required./)).toBeInTheDocument();
+    fireEvent.click(cancelButton);
 
-    });
-
-    test("No Error messsages on good input", async () => {
-
-        const mockSubmitAction = jest.fn();
-
-
-        const { getByTestId, queryByText } = render(
-            <Router  >
-                <UCSBSubjectForm submitAction={mockSubmitAction} />
-            </Router>
-        );
-        await waitFor(() => expect(getByTestId("UCSBSubjectForm-quarterYYYYQ")).toBeInTheDocument());
-
-        const quarterYYYYQField = getByTestId("UCSBSubjectForm-quarterYYYYQ");
-        const nameField = getByTestId("UCSBSubjectForm-name");
-        const localSubjectTimeField = getByTestId("UCSBSubjectForm-localSubjectTime");
-        const submitButton = getByTestId("UCSBSubjectForm-submit");
-
-        fireEvent.change(quarterYYYYQField, { target: { value: '20221' } });
-        fireEvent.change(nameField, { target: { value: 'noon on January 2nd' } });
-        fireEvent.change(localSubjectTimeField, { target: { value: '2022-01-02T12:00' } });
-        fireEvent.click(submitButton);
-
-        await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
-
-        expect(queryByText(/QuarterYYYYQ must be in the format YYYYQ/)).not.toBeInTheDocument();
-        expect(queryByText(/localSubjectTime must be in ISO format/)).not.toBeInTheDocument();
-
-    });
-
-
-    test("Test that navigate(-1) is called when Cancel is clicked", async () => {
-
-        const { getByTestId } = render(
-            <Router  >
-                <UCSBSubjectForm />
-            </Router>
-        );
-        await waitFor(() => expect(getByTestId("UCSBSubjectForm-cancel")).toBeInTheDocument());
-        const cancelButton = getByTestId("UCSBSubjectForm-cancel");
-
-        fireEvent.click(cancelButton);
-
-        await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
-
-    });
-
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
+  });
 });
-
-
