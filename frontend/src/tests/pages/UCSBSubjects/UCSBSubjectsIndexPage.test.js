@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import {  render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import UCSBSubjectsIndexPage from "main/pages/UCSBSubjects/UCSBSubjectsIndexPage";
@@ -6,21 +6,10 @@ import UCSBSubjectsIndexPage from "main/pages/UCSBSubjects/UCSBSubjectsIndexPage
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { ucsbSubjectsFixtures } from "fixtures/ucsbSubjectsFixtures";
+import { subjectFixtures } from "fixtures/ucsbSubjectsFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
 import mockConsole from "jest-mock-console";
-
-
-const mockToast = jest.fn();
-jest.mock('react-toastify', () => {
-    const originalModule = jest.requireActual('react-toastify');
-    return {
-        __esModule: true,
-        ...originalModule,
-        toast: (x) => mockToast(x)
-    };
-});
 
 describe("UCSBSubjectsIndexPage tests", () => {
 
@@ -45,7 +34,7 @@ describe("UCSBSubjectsIndexPage tests", () => {
     test("renders without crashing for regular user", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbsubjects/all").reply(200, []);
+        axiosMock.onGet("/api/UCSBSubjects/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -61,7 +50,7 @@ describe("UCSBSubjectsIndexPage tests", () => {
     test("renders without crashing for admin user", () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbsubjects/all").reply(200, []);
+        axiosMock.onGet("/api/UCSBSubjects/all").reply(200, []);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -74,10 +63,10 @@ describe("UCSBSubjectsIndexPage tests", () => {
 
     });
 
-    test("renders three subjects without crashing for regular user", async () => {
+    test("renders two subjects without crashing for regular user", async () => {
         setupUserOnly();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbsubjects/all").reply(200, ucsbSubjectsFixtures.threeSubjects);
+        axiosMock.onGet("/api/UCSBSubjects/all").reply(200, subjectFixtures.twoSubjects);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -87,16 +76,34 @@ describe("UCSBSubjectsIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); });
-        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
-        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
+        await waitFor(() => {
+            expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+            expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
 
+            expect(getByTestId(`${testId}-cell-row-0-col-subjectCode`)).toHaveTextContent("CMPSC");
+            expect(getByTestId(`${testId}-cell-row-1-col-subjectCode`)).toHaveTextContent("COMM");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-subjectTranslation`)).toHaveTextContent("Computer Science");
+            expect(getByTestId(`${testId}-cell-row-1-col-subjectTranslation`)).toHaveTextContent("Communications");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-deptCode`)).toHaveTextContent("ENGR");
+            expect(getByTestId(`${testId}-cell-row-1-col-deptCode`)).toHaveTextContent("L&S");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-collegeCode`)).toHaveTextContent("UCSB");
+            expect(getByTestId(`${testId}-cell-row-1-col-collegeCode`)).toHaveTextContent("UCSB");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-relatedDeptCode`)).toHaveTextContent("DUNNO");
+            expect(getByTestId(`${testId}-cell-row-1-col-relatedDeptCode`)).toHaveTextContent("DUNNO");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-inactive`)).toHaveTextContent("false");
+            expect(getByTestId(`${testId}-cell-row-1-col-inactive`)).toHaveTextContent("false");
+        });
     });
 
-    test("renders three subjects without crashing for admin user", async () => {
+    test("renders two subjects without crashing for admin user", async () => {
         setupAdminUser();
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbsubjects/all").reply(200, ucsbSubjectsFixtures.threeSubjects);
+        axiosMock.onGet("/api/UCSBSubjects/all").reply(200, subjectFixtures.twoSubjects);
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
@@ -106,17 +113,35 @@ describe("UCSBSubjectsIndexPage tests", () => {
             </QueryClientProvider>
         );
 
-        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); });
-        expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
-        expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
+        await waitFor(() => { 
+            expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+            expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
 
+            expect(getByTestId(`${testId}-cell-row-0-col-subjectCode`)).toHaveTextContent("1A");
+            expect(getByTestId(`${testId}-cell-row-1-col-subjectCode`)).toHaveTextContent("2A");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-subjectTranslation`)).toHaveTextContent("1B");
+            expect(getByTestId(`${testId}-cell-row-1-col-subjectTranslation`)).toHaveTextContent("2B");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-deptCode`)).toHaveTextContent("1C");
+            expect(getByTestId(`${testId}-cell-row-1-col-deptCode`)).toHaveTextContent("2C");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-collegeCode`)).toHaveTextContent("1D");
+            expect(getByTestId(`${testId}-cell-row-1-col-collegeCode`)).toHaveTextContent("2D");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-relatedDeptCode`)).toHaveTextContent("1E");
+            expect(getByTestId(`${testId}-cell-row-1-col-relatedDeptCode`)).toHaveTextContent("2E");
+
+            expect(getByTestId(`${testId}-cell-row-0-col-inactive`)).toHaveTextContent("true");
+            expect(getByTestId(`${testId}-cell-row-1-col-inactive`)).toHaveTextContent("false");
+         });
     });
 
     test("renders empty table when backend unavailable, user only", async () => {
         setupUserOnly();
 
         const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbsubjects/all").timeout();
+        axiosMock.onGet("/api/UCSBSubjects/all").timeout();
 
         const restoreConsole = mockConsole();
 
@@ -131,42 +156,10 @@ describe("UCSBSubjectsIndexPage tests", () => {
         await waitFor(() => { expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1); });
 
         const errorMessage = console.error.mock.calls[0][0];
-        expect(errorMessage).toMatch("Error communicating with backend via GET on /api/ucsbsubjects/all");
+        expect(errorMessage).toMatch("Error communicating with backend via GET on /api/UCSBSubjects/all");
         restoreConsole();
 
         expect(queryByTestId(`${testId}-cell-row-0-col-id`)).not.toBeInTheDocument();
     });
 
-    test("test what happens when you click delete, admin", async () => {
-        setupAdminUser();
-
-        const queryClient = new QueryClient();
-        axiosMock.onGet("/api/ucsbsubjects/all").reply(200, ucsbSubjectsFixtures.threeSubjects);
-        axiosMock.onDelete("/api/ucsbsubjects").reply(200, "UCSBSubject with id 1 was deleted");
-
-
-        const { getByTestId } = render(
-            <QueryClientProvider client={queryClient}>
-                <MemoryRouter>
-                    <UCSBSubjectsIndexPage />
-                </MemoryRouter>
-            </QueryClientProvider>
-        );
-
-        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument(); });
-
-       expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); 
-
-
-        const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-        expect(deleteButton).toBeInTheDocument();
-       
-        fireEvent.click(deleteButton);
-
-        await waitFor(() => { expect(mockToast).toBeCalledWith("UCSBSubject with id 1 was deleted") });
-
-    });
-
 });
-
-

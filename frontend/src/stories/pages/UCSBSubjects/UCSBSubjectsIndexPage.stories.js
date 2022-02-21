@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import UCSBSubjectsIndexPage from "main/pages/UCSBSubjects/UCSBSubjectsIndexPage";

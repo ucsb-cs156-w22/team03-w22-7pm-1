@@ -20,7 +20,7 @@ export default function UCSBSubjectsTable({ id,subjectCode,subjectTranslation,de
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/ucsbsubjects/all"]
+        ["/api/UCSBSubjects/all"]
     );
     // Stryker enable all 
 
@@ -30,32 +30,32 @@ export default function UCSBSubjectsTable({ id,subjectCode,subjectTranslation,de
 
     const columns = [
         {
-            Header: 'id',
-            accessor: 'id', // accessor is the "key" in the data
+            Header: "ID",
+            accessor: "id", // accessor is the "key" in the data
         },
         {
-            Header: 'Subject Code',
-            accessor: 'subjectCode',
+            Header: "Subject Code",
+            accessor: "subjectCode",
         },
         {
-            Header: 'Subject Translation',
-            accessor: 'subjectTranslation',
+            Header: "Subject Translation",
+            accessor: "subjectTranslation",
         },
         {
-            Header: 'Department Code',
-            accessor: 'deptCode',
+            Header: "Department Code",
+            accessor: "deptCode",
         },
         {
-            Header: 'College Code',
-            accessor: 'collegeCode',
+            Header: "College Code",
+            accessor: "collegeCode",
         },
         {
-            Header: 'Related Department Code',
-            accessor: 'relatedDeptCode',
+            Header: "Related Department Code",
+            accessor: "relatedDeptCode",
         },
         {
-            Header: 'Inactive',
-            accessor: 'inactive',
+            Header: "Inactive",
+            accessor: "inactive",
         }
         
     ];
@@ -67,10 +67,10 @@ export default function UCSBSubjectsTable({ id,subjectCode,subjectTranslation,de
 
     // Stryker disable next-line ArrayDeclaration : [columns] is a performance optimization
     const memoizedColumns = React.useMemo(() => columns, [columns]);
-    const memoizedDates = React.useMemo(() => dates, [dates]);
+    const memoizedUCSBSubjects = React.useMemo(() => subjects, [subjects]);
 
     return <OurTable
-        data={memoizedDates}
+        data={memoizedUCSBSubjects}
         columns={memoizedColumns}
         testid={"UCSBSubjectsTable"}
     />;

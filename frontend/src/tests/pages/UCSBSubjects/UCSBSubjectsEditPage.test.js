@@ -43,7 +43,7 @@ describe("UCSBSubjectsEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/ucsbsubjects", { params: { id: 17 } }).timeout();
+            axiosMock.onGet("/api/UCSBSubjects", { params: { id: 17 } }).timeout();
         });
 
         const queryClient = new QueryClient();
@@ -69,7 +69,7 @@ describe("UCSBSubjectsEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/ucsbsubjects", { params: { id: 17 } }).reply(200, {
+            axiosMock.onGet("/api/UCSBSubjects", { params: { id: 17 } }).reply(200, {
                 id: 17,
                 subjectCode: "CMPSC",
                 subjectTranslation: "Computer Science",
@@ -78,7 +78,7 @@ describe("UCSBSubjectsEditPage tests", () => {
                 relatedDeptCode: "DUNNO",
                 inactive: false
             });
-            axiosMock.onPut('/api/ucsbsubjects').reply(200, {
+            axiosMock.onPut('/api/UCSBSubjects').reply(200, {
                 id: 17,
                 subjectCode: "COMM",
                 subjectTranslation: "Communications",
