@@ -110,8 +110,12 @@ describe("UCSBSubjectsEditPage tests", () => {
                 </QueryClientProvider>
             );
 
+<<<<<<< HEAD
             await waitFor(() => expect(getByTestId("UCSBSubjectForm-id")).toBeInTheDocument());
                 
+=======
+            await waitFor(() => expect(getByTestId("UCSBSubjectForm-subjectCode")).toBeInTheDocument());
+>>>>>>> dcddd208268ebdc51183f2461ab79ada08a96d97
             const idField = getByTestId("UCSBSubjectForm-id");
             const subjectCodeField = getByTestId("UCSBSubjectForm-subjectCode");
             const subjectTranslationField = getByTestId("UCSBSubjectForm-subjectTranslation");

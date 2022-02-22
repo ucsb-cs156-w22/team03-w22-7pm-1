@@ -10,6 +10,7 @@ export default function UCSBSubjectsCreatePage() {
     url: "/api/ucsbsubjects/post",
     method: "POST",
     params: {
+      id: ucsbSubject.id,
       subjectCode: ucsbSubject.subjectCode,
       subjectTranslation: ucsbSubject.subjectTranslation,
       deptCode: ucsbSubject.deptCode,
@@ -20,7 +21,7 @@ export default function UCSBSubjectsCreatePage() {
   });
 
   const onSuccess = (ucsbSubject) => {
-    toast(`New ucsbSubject Created - id: ${ucsbSubject.id} subjectCode: ${ucsbSubject.subjectCode}`);
+    toast(`New ucsbSubject Created - id: ${ucsbSubject.id} name: ${ucsbSubject.name}`);
   }
 
   const mutation = useBackendMutation(

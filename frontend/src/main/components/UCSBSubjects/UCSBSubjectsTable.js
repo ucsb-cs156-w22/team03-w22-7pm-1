@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
 //EX: To be completely honest I'm not sure if I need those arguements in this functions's parameters
-export default function UCSBSubjectsTable({ id,subjectCode,subjectTranslation,deptCode,collegeCode,relatedDeptCode,inactive, currentUser }) {
+export default function UCSBSubjectsTable({ subjects, currentUser }) {
 
     const navigate = useNavigate();
 
