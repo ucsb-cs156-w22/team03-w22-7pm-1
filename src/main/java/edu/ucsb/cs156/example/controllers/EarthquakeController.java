@@ -64,7 +64,7 @@ public class EarthquakeController extends ApiController {
 */
         return ResponseEntity.ok().body(eqfSaved);
     }
-
+/*
     @ApiOperation(value = "Get earthquakes a certain distance from UCSB's Storke Tower", notes = "JSON return format documented here: https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php")
     @GetMapping("/get")
     public ResponseEntity<String> getEarthquakes(
@@ -75,7 +75,7 @@ public class EarthquakeController extends ApiController {
         String result = earthquakeQueryService.getJSON(distanceKM, minMagnitude);
         return ResponseEntity.ok().body(result);
     }
-
+*/
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Delete all earthquakes from the collection")
     @PostMapping("/purge")

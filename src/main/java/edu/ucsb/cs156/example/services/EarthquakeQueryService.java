@@ -62,7 +62,7 @@ public class EarthquakeQueryService {
 
         return theEqfListing.getFeatures();
     }
-
+/*
     public String getJSON(String distanceKM, String minMagnitude) throws HttpClientErrorException {
         log.info("distanceKM={}, minMagnitude={}", distanceKM, minMagnitude);
         HttpHeaders headers = new HttpHeaders();
@@ -79,5 +79,5 @@ public class EarthquakeQueryService {
                 uriVariables);
         return re.getBody();
     }
-
+*/
 }
