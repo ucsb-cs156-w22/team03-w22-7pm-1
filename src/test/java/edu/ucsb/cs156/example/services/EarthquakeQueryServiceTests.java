@@ -34,11 +34,11 @@ public class EarthquakeQueryServiceTests {
     private ObjectMapper mapper;
     @Test
     public void test_retriveEarthquakeFeatures() throws JsonProcessingException {
-        String distanceKm = "10";
+        String distanceKM = "10";
         String minMagnitude = "1.5";
         String ucsbLat = "34.4140"; // hard coded params for Storke Tower
         String ucsbLong = "-119.8489";
-        String expectedURL = EarthquakeQueryService.ENDPOINT.replace("{distanceKM}", distanceKm)
+        String expectedURL = EarthquakeQueryService.ENDPOINT.replace("{distanceKM}", distanceKM)
                 .replace("{minMagnitude}", minMagnitude).replace("{latitude}", ucsbLat).replace("{longitude}", ucsbLong);
 
         eqfMetaData metadata = eqfMetaData.builder()
@@ -78,7 +78,7 @@ public class EarthquakeQueryServiceTests {
                 .build();
 
 
-        eqfGeometries geometries = eqfGeometries.builder()
+        eqfGeometries geometry = eqfGeometries.builder()
                 .type("testType")
                 .coordinates(List.of(0.0, 1.0, 2.0))
                 .build();
@@ -87,14 +87,14 @@ public class EarthquakeQueryServiceTests {
                 ._id("123")
                 .id("testId")
                 .type("Feature")
-                .geometries(geometries)
+                .geometry(geometry)
                 .properties(properties)
                 .build();
 
         eqfListing eqflisting = eqfListing.builder()
                 .type("testListing")
-                .eqfList(List.of(feature))
-                .metaData(metadata)
+                .features(List.of(feature))
+                .metadata(metadata)
                 .build();
 
         String mockJSONResult = mapper.writeValueAsString(eqflisting);
@@ -104,9 +104,9 @@ public class EarthquakeQueryServiceTests {
             .andExpect(header("Content-Type", MediaType.APPLICATION_JSON.toString()))
             .andRespond(withSuccess(mockJSONResult, MediaType.APPLICATION_JSON));
 
-        Iterable<EarthquakeFeature> actualResult = earthquakeQueryService.retriveEarthquakeFeatures(distanceKm, minMagnitude);
+        List<EarthquakeFeature> actualResult = earthquakeQueryService.retriveEarthquakeFeatures(distanceKM, minMagnitude);
         String actualResultAsJSON = mapper.writeValueAsString(actualResult);
-        String expectedResultAsJSON = mapper.writeValueAsString(eqflisting.getEqfList());
+        String expectedResultAsJSON = mapper.writeValueAsString(eqflisting.getFeatures());
 
         assertEquals(expectedResultAsJSON, actualResultAsJSON);
     }

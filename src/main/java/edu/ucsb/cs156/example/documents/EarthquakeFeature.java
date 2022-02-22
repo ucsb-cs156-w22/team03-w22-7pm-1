@@ -22,6 +22,7 @@ public class EarthquakeFeature {
 
     private String type;
     private eqfProperties properties;
-    private eqfGeometries geometries;
+//    private eqfGeometries geometries;
+    private eqfGeometries geometry;
     private String id;
 }
