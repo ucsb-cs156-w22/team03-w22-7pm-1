@@ -15,6 +15,15 @@ import UCSBSubjectsIndexPage from "main/pages/UCSBSubjects/UCSBSubjectsIndexPage
 import UCSBSubjectsCreatePage from "main/pages/UCSBSubjects/UCSBSubjectsCreatePage";
 import UCSBSubjectsEditPage from "main/pages/UCSBSubjects/UCSBSubjectsEditPage";
 
+//add Earthquakes 
+//************************************** */
+import EarthquakesIndexPage from "main/pages/Earthquakes/EarthquakesIndexPage";
+import EarthquakesCreatePage from "main/pages/Earthquakes/EarthquakesCreatePage";
+import EarthquakesEditPage from "main/pages/Earthquakes/EarthquakesEditPage";
+
+
+//************************************** */
+
 
 import StudentsIndexPage from "main/pages/Students/StudentsIndexPage";
 import StudentsCreatePage from "main/pages/Students/StudentsCreatePage";
@@ -91,6 +100,21 @@ function App() {
             <>
               <Route exact path="/ucsbsubjects/edit/:id" element={<UCSBSubjectsEditPage />} />
               <Route exact path="/ucsbsubjects/create" element={<UCSBSubjectsCreatePage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/Earthquakes/list" element={<EarthquakesIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_ADMIN") && (
+            <>
+              <Route exact path="/Earthquakes/edit/:id" element={<EarthquakesEditPage />} />
+              <Route exact path="/Earthquakes/create" element={<EarthquakesCreatePage />} />
             </>
           )
         }

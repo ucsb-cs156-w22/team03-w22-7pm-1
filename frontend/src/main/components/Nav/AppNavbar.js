@@ -108,6 +108,22 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
             </Nav>
+            <Nav className="mr-auto">
+              {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="Earthquakes" id="appnavbar-Earthquakes-dropdown" data-testid="appnavbar-Earthquakes-dropdown" >
+                    <NavDropdown.Item href="/Earthquakes/list" data-testid="appnavbar-Earthquakes-list">List</NavDropdown.Item>
+                    {
+                      hasRole(currentUser, "ROLE_ADMIN") && (
+                        <NavDropdown.Item href="/Earthquakes/create" data-testid="appnavbar-Earthquakes-create">Create</NavDropdown.Item>
+                      )
+                    }
+                  </NavDropdown>
+                )
+              }
+            </Nav>
+
+
 
             <Nav className="ml-auto">
               {
