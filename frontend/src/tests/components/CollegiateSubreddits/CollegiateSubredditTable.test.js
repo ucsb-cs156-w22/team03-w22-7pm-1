@@ -62,7 +62,7 @@ describe("UserTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={CollegiateSubredditFixtures.threeDates} currentUser={currentUser} />
+          <CollegiateSubredditsTable subreddits={CollegiateSubredditFixtures.threeSubreddits} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -102,7 +102,7 @@ describe("UserTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <CollegiateSubredditsTable subreddits={CollegiateSubredditFixtures.threeDates} currentUser={currentUser} />
+          <CollegiateSubredditsTable subreddits={CollegiateSubredditFixtures.threeSubreddits} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
