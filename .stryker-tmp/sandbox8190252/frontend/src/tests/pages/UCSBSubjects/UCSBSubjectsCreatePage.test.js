@@ -63,7 +63,7 @@ describe("UCSBSubjectsCreatePage tests", () => {
             inactive: false
         };
 
-        axiosMock.onPost("/api/ucsbsubjects/post").reply( 202, ucsbSubject );
+        axiosMock.onPost("/api/UCSBSubjects/post").reply( 202, ucsbSubject );
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>

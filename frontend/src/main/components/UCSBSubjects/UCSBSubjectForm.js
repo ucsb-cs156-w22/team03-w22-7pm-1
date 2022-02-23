@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
-import { Button, Form } from 'react-bootstrap';
+import React, { useState } from 'react'
+import { Button, Form, DropdownButton, Dropdown } from 'react-bootstrap';
+
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 
-function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create" }) {
+function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel = "Create" }) {
 
     // Stryker disable all
     const {
@@ -45,7 +46,7 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create
                     id="subjectCode"
                     type="text"
                     isInvalid={Boolean(errors.subjectCode)}
-                    {...register("subjectCode", { required: "Subject code is required."})}
+                    {...register("subjectCode", { required: "Subject code is required." })}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.subjectCode?.message}
@@ -59,7 +60,7 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create
                     id="subjectTranslation"
                     type="text"
                     isInvalid={Boolean(errors.subjectTranslation)}
-                    {...register("subjectTranslation", { required: "Subject translation is required."})}
+                    {...register("subjectTranslation", { required: "Subject translation is required." })}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.subjectTranslation?.message}
@@ -73,7 +74,7 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create
                     id="deptCode"
                     type="text"
                     isInvalid={Boolean(errors.deptCode)}
-                    {...register("deptCode", { required: "Department code is required."})}
+                    {...register("deptCode", { required: "Department code is required." })}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.deptCode?.message}
@@ -87,7 +88,7 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create
                     id="collegeCode"
                     type="text"
                     isInvalid={Boolean(errors.collegeCode)}
-                    {...register("collegeCode", { required: "College code is required."})}
+                    {...register("collegeCode", { required: "College code is required." })}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.collegeCode?.message}
@@ -101,7 +102,7 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create
                     id="relatedDeptCode"
                     type="text"
                     isInvalid={Boolean(errors.relatedDeptCode)}
-                    {...register("relatedDeptCode", { required: "Related dept code is required."})}
+                    {...register("relatedDeptCode", { required: "Related dept code is required." })}
                 />
                 <Form.Control.Feedback type="invalid">
                     {errors.relatedDeptCode?.message}
@@ -111,18 +112,14 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel="Create
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="inactive">Inactive</Form.Label>
                 <Form.Control
-                    data-testid="UCSBSubjectForm-inactive"
-                    id="inactive"
-                    type="boolean"
-                    isInvalid={Boolean(errors.invalid)}
-                    {...register("invalid", { required: true, pattern: bool_regex })}
+                    <Form.Select aria-label="Default select example">
+                    <option value={true}>True</option>
+                    <option value={false}>False</option>
                 />
-                <Form.Control.Feedback type="invalid">
-                    {errors.invalid && 'Inactive is required. '}
-                    {errors.invalid?.type === 'pattern' && 'Inactive must be a boolean'}
-                </Form.Control.Feedback>
+                />
+
             </Form.Group>
-            
+
 
             <Button
                 type="submit"
