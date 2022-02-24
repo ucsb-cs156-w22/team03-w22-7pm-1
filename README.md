@@ -1,5 +1,4 @@
 [![codecov](https://codecov.io/gh/ucsb-cs156-w22/team03-w22-7pm-1/branch/main/graph/badge.svg?token=pqNbKBnulx)](https://codecov.io/gh/ucsb-cs156-w22/team03-w22-7pm-1)
-
 # demo-spring-react-example-v2: dsre-v2
 
 Heroku deployment is here:
@@ -9,8 +8,8 @@ Heroku deployment is here:
 
 Storybook is here:
 
-- Production: <https://ucsb-cs156-w22.github.io/team03-w22-7pm-1-docs/>
-- QA: <https://ucsb-cs156-w22.github.io/team03-w22-7pm-1-docs-qa/>
+- Production: <https://ucsb-cs156-w22.github.io/STARTER-team03-docs/>
+- QA: <https://ucsb-cs156-w22.github.io/STARTER-team03-docs-qa/>
 
 The GitHub actions script to deploy the Storybook to QA requires some configuration; see [docs/github-actions.md](docs/github-actions.md) for details.
 
@@ -106,7 +105,6 @@ To access the swagger API endpoints, use:
     ```
 
 - On Heroku, without CLI:
-
   - Upper right of dashboard, select "More" then "Run Console"
 
     <img alt="Heroku Dashboard; More; Run Console" src="https://user-images.githubusercontent.com/1119017/150204550-a1027ab8-6ce7-4770-b566-a43928f5c3a0.png" width="300" />
@@ -114,5 +112,4 @@ To access the swagger API endpoints, use:
   - Enter `psql $DATABASE_URL` and click `Run`
 
     <img alt="Enter psql $DATABASE_URL and click Run" src="https://user-images.githubusercontent.com/1119017/150206174-43193825-1afd-49f4-aeaf-cfadf0c0c6f3.png" width="400" />
-
 - Cheatsheet of `psql` commands: <https://www.geeksforgeeks.org/postgresql-psql-commands/>
