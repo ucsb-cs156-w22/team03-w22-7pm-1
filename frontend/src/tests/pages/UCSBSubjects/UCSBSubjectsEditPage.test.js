@@ -180,6 +180,7 @@ describe("UCSBSubjectsEditPage tests", () => {
             expect(axiosMock.history.put.length).toBe(1); 
             expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
+                id: 17,
                 subjectCode: "COMM",
                 subjectTranslation: "Communications",
                 deptCode: "L&S",

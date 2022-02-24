@@ -29,6 +29,7 @@ export default function UCSBSubjectsEditPage() {
       id: ucsbSubject.id,
     },
     data: {
+      id: ucsbSubject.id,
       subjectCode: ucsbSubject.subjectCode,
       subjectTranslation: ucsbSubject.subjectTranslation,
       deptCode: ucsbSubject.deptCode,
