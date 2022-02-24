@@ -8,7 +8,7 @@ const subjectFixtures = {
         "relatedDeptCode": "DUNNO",
         "inactive": "false"
     },
-    twoSubjects: [
+    threeSubjects: [
         {
             "id": 1,
             "subjectCode": "CMPSC",
@@ -23,6 +23,15 @@ const subjectFixtures = {
             "subjectCode": "COMM",
             "subjectTranslation": "Communications",
             "deptCode": "L&S",
+            "collegeCode": "UCSB",
+            "relatedDeptCode": "DUNNO",
+            "inactive": "false"
+        },
+        {
+            "id": 3,
+            "subjectCode": "MATH",
+            "subjectTranslation": "Math",
+            "deptCode": "ENGR",
             "collegeCode": "UCSB",
             "relatedDeptCode": "DUNNO",
             "inactive": "false"

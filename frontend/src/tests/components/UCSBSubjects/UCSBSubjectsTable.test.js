@@ -62,7 +62,7 @@ describe("UCSBSubjectsTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBSubjectsTable subjects={subjectFixtures.twoSubjects} currentUser={currentUser} />
+          <UCSBSubjectsTable subjects={subjectFixtures.threeSubjects} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -112,7 +112,7 @@ describe("UCSBSubjectsTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBSubjectsTable subjects={subjectFixtures.twoSubjects} currentUser={currentUser} />
+          <UCSBSubjectsTable subjects={subjectFixtures.threeSubjects} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -136,7 +136,7 @@ describe("UCSBSubjectsTable tests", () => {
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBSubjectsTable subjects={subjectFixtures.twoSubjects} currentUser={currentUser} />
+          <UCSBSubjectsTable subjects={subjectFixtures.threeSubjects} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
