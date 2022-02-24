@@ -111,12 +111,17 @@ function UCSBSubjectForm({ initialUCSBSubject, submitAction, buttonLabel = "Crea
 
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="inactive">Inactive</Form.Label>
-                <Form.Control
-                    <Form.Select aria-label="Default select example">
+                <Form.Control 
+                    as="select"
+                    id="inactive"
+                    data-testid="UCSBSubjectForm-inactive"
+                    aria-label="Default select example"
+                     {...register("inactive")}>
+
                     <option value={true}>True</option>
                     <option value={false}>False</option>
-                />
-                />
+                </Form.Control>
+                
 
             </Form.Group>
 

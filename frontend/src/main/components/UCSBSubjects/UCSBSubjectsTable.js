@@ -55,7 +55,8 @@ export default function UCSBSubjectsTable({ subjects, currentUser }) {
         },
         {
             Header: "Inactive",
-            accessor: "inactive",
+            id: 'inactive',
+            accessor: (row, _rowIndex) => String(row.inactive) // hack needed for boolean values to show up
         }
         
     ];
@@ -68,7 +69,7 @@ export default function UCSBSubjectsTable({ subjects, currentUser }) {
     // Stryker disable next-line ArrayDeclaration : [columns] is a performance optimization
     const memoizedColumns = React.useMemo(() => columns, [columns]);
     const memoizedUCSBSubjects = React.useMemo(() => subjects, [subjects]);
-
+    console.log("subjects",subjects)
     return <OurTable
         data={memoizedUCSBSubjects}
         columns={memoizedColumns}
