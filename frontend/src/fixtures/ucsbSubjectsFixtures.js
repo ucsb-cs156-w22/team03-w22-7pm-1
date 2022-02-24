@@ -1,4 +1,4 @@
-const ucsbSubjectsFixtures = {
+const subjectFixtures = {
     oneSubject: {
         "id": 1,
         "subjectCode": "CMPSC",
@@ -29,15 +29,16 @@ const ucsbSubjectsFixtures = {
         },
         {
             "id": 3,
-            "subjectCode": "CHIN",
-            "subjectTranslation": "Chinese",
-            "deptCode": "L&S",
+            "subjectCode": "MATH",
+            "subjectTranslation": "Math",
+            "deptCode": "ENGR",
             "collegeCode": "UCSB",
             "relatedDeptCode": "DUNNO",
             "inactive": "false"
         }
+
     ]
 };
 
 
-export { ucsbSubjectsFixtures };
+export { subjectFixtures };
