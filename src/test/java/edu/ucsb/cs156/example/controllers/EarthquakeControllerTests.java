@@ -193,10 +193,7 @@ public class EarthquakeControllerTests extends ControllerTestCase {
 
             when(earthquakeQueryService.retriveEarthquakeFeatures(eq(distanceKM),eq(minMagnitude))).thenReturn(featureList);
 
-            //List<EarthquakeFeature> testList = earthquakesCollection.findAll();
-
             MvcResult response = mockMvc.perform(
-                                //post("/api/redditposts/storeone?subreddit=UCSantaBarbara")
                                 post("/api/earthquakes/retrieve?distanceKM=10&minMagnitude=1.5")
                                                 .with(csrf()))
                                 .andExpect(status().isOk())

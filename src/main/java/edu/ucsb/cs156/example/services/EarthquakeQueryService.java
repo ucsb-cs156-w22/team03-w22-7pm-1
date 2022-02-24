@@ -37,9 +37,7 @@ public class EarthquakeQueryService {
 
 
     public static final String ENDPOINT = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude={minMagnitude}&maxradiuskm={distanceKM}&latitude={latitude}&longitude={longitude}";
-/*
-    public Iterable<EarthquakeFeature> retriveEarthquakeFeatures(String distanceKM, String minMagnitude) throws HttpClientErrorException, JsonProcessingException {
- */   
+  
     public List<EarthquakeFeature> retriveEarthquakeFeatures(String distanceKM, String minMagnitude) throws HttpClientErrorException, JsonProcessingException {
 
         log.info("distanceKM={}, minMagnitude={}", distanceKM, minMagnitude);
@@ -62,22 +60,5 @@ public class EarthquakeQueryService {
 
         return theEqfListing.getFeatures();
     }
-/*
-    public String getJSON(String distanceKM, String minMagnitude) throws HttpClientErrorException {
-        log.info("distanceKM={}, minMagnitude={}", distanceKM, minMagnitude);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        String ucsbLat = "34.4140"; // hard coded params for Storke Tower
-        String ucsbLong = "-119.8489";
-        Map<String, String> uriVariables = Map.of("minMagnitude", minMagnitude, "distanceKM", distanceKM,"latitude", ucsbLat,"longitude", ucsbLong);
-
-        ResponseEntity<String> re = restTemplate.exchange(ENDPOINT, HttpMethod.GET, entity, String.class,
-                uriVariables);
-        return re.getBody();
-    }
-*/
 }

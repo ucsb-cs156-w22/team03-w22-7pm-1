@@ -56,26 +56,9 @@ public class EarthquakeController extends ApiController {
         log.info("retriveFeatures: distanceKM={} minMagnitude={}", distanceKM, minMagnitude);
         List<EarthquakeFeature> eqf = earthquakeQueryService.retriveEarthquakeFeatures(distanceKM,minMagnitude);
         List<EarthquakeFeature> eqfSaved = earthquakesCollection.saveAll(eqf);
-/*
-        List<EarthquakeFeature> eqfSaved = new ArrayList<>();
-        for(EarthquakeFeature ef : eqf){
-            eqfSaved.add(earthquakesCollection.save(ef));
-        }
-*/
         return ResponseEntity.ok().body(eqfSaved);
     }
-/*
-    @ApiOperation(value = "Get earthquakes a certain distance from UCSB's Storke Tower", notes = "JSON return format documented here: https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php")
-    @GetMapping("/get")
-    public ResponseEntity<String> getEarthquakes(
-        @ApiParam("distance in km, e.g. 100") @RequestParam String distanceKM,
-        @ApiParam("minimum magnitude, e.g. 2.5") @RequestParam String minMagnitude
-    ) throws JsonProcessingException {
-        log.info("getEarthquakes: distanceKM={} minMagnitude={}", distanceKM, minMagnitude);
-        String result = earthquakeQueryService.getJSON(distanceKM, minMagnitude);
-        return ResponseEntity.ok().body(result);
-    }
-*/
+    
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Delete all earthquakes from the collection")
     @PostMapping("/purge")
