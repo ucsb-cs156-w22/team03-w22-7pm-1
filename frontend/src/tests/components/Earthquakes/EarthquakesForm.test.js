@@ -33,9 +33,9 @@ describe("EarthquakesForm tests", () => {
                 <EarthquakesForm  />
             </Router>
         );
-        await waitFor(() => expect(getByTestId("EarthquakesForm-submit")).toBeInTheDocument());
+        await waitFor(() => expect(getByTestId("EarthquakesForm-retrieve")).toBeInTheDocument());
         
-        const submitButton = getByTestId("EarthquakesForm-submit");
+        const submitButton = getByTestId("EarthquakesForm-retrieve");
 
         fireEvent.change(invalidField, { target: { value: 'bad-input' } });
         fireEvent.click(submitButton);
@@ -49,8 +49,8 @@ describe("EarthquakesForm tests", () => {
                 <EarthquakesForm />
             </Router>
         );
-        await waitFor(() => expect(getByTestId("EarthquakesForm-submit")).toBeInTheDocument());
-        const submitButton = getByTestId("EarthquakesForm-submit");
+        await waitFor(() => expect(getByTestId("EarthquakesForm-retrieve")).toBeInTheDocument());
+        const submitButton = getByTestId("EarthquakesForm-retrieve");
 
         fireEvent.click(submitButton);
 
@@ -72,11 +72,11 @@ describe("EarthquakesForm tests", () => {
         );
         await waitFor(() => expect(getByTestId("EarthquakesForm-distance")).toBeInTheDocument());
 
-        const distanceField = getByTestId("EarthquakesForm-distance");
-        const magField = getByTestId("EarthquakesForm-mag");
-        const submitButton = getByTestId("EarthquakesForm-submit");
+        const distanceKM = getByTestId("EarthquakesForm-distance");
+        const  minMagnitude = getByTestId("EarthquakesForm-mag");
+        const submitButton = getByTestId("EarthquakesForm-retrieve");
 
-        fireEvent.change(distance, { target: { value: '2.16' } });
+        fireEvent.change(distanceKM, { target: { value: '2.16' } });
         fireEvent.change(minMagnitude, { target: { value: '1' } });
         fireEvent.click(submitButton);
 

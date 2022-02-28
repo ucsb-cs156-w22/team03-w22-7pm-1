@@ -30,10 +30,10 @@ function EarthquakesForm({ initialEarthquakes, SubmitAction, buttonLabel="Retrie
                     id="distanceKM"
                     type="text"
                     isInvalid={Boolean(errors.distanceKm)}
-                    {...register("distance", { required: "Distance is required." })}
+                    {...register("distance", { required: "distance is required." })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.distance?.message}
+                    {errors.distanceKm?.message}
                 </Form.Control.Feedback>
             </Form.Group>
             {/* minMagnitude */}
@@ -43,13 +43,13 @@ function EarthquakesForm({ initialEarthquakes, SubmitAction, buttonLabel="Retrie
                     data-testid="EarthquakesForm-mag"
                     id="minMagnitude"
                     type="text"
-                    isInvalid={Boolean(errors.name)}
+                    isInvalid={Boolean(errors.minMagnitude)}
                     {...register("minMagnitude", {
-                        required: "min Magnitude is required."
+                        required: "mag is required."
                     })}
                 />
                 <Form.Control.Feedback type="invalid">
-                    {errors.mag?.message}
+                    {errors.minMagnitude?.message}
                 </Form.Control.Feedback>
             </Form.Group>
 
