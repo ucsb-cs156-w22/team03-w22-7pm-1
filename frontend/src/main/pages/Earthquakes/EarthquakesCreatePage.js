@@ -13,6 +13,7 @@ export default function EarthquakesCreatePage() {
       distanceKM: earthquakes.distanceKM,
       minMagnitude: earthquakes.minMagnitude
     }
+    
   });
 //this line need to be fix 
   const onSuccess = (earthquakes) => {

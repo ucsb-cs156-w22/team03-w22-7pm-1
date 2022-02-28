@@ -113,8 +113,7 @@ function App() {
         {
           hasRole(currentUser, "ROLE_ADMIN") && (
             <>
-
-              <Route exact path="/Earthquakes/create" element={<EarthquakesCreatePage />} />
+              <Route exact path="/Earthquakes/retrieve" element={<EarthquakesCreatePage />} />
             </>
           )
         }

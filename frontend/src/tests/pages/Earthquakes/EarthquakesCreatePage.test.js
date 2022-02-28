@@ -75,7 +75,7 @@ describe("EarthquakesCreatePage tests", () => {
 
         const distanceField = getByTestId("EarthquakesForm-distance");
         const magField = getByTestId("EarthquakesForm-mag");
-        const submitButton = getByTestId("EarthquakesForm-submit");
+        const submitButton = getByTestId("EarthquakesForm-retrieve");
 
         fireEvent.change(distanceField, { target: { value: '1' } });
         fireEvent.change(magField, { target: { value: '2.6' } });
