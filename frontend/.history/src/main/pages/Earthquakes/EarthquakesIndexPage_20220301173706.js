@@ -31,7 +31,6 @@ export default function EarthquakesIndexPage() {
       {
         onSuccess: () =>  toast("purge all"),
       },
-// Stryker disable next-line all : don't test internal caching of React Query
       ['/api/earthquakes/all'],
     );
   

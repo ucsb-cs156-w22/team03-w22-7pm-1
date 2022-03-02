@@ -62,7 +62,8 @@ describe("EarthquakesRetrieve tests", () => {
         "time": 1644571919000
         }];
 
-        axiosMock.onPost("/api/earthquakes/retrieve").reply( 202, earthquakes );
+    //    axiosMock.onPost("/api/earthquakes/retrieve").reply( 202, earthquakes );
+        axiosMock.onPost("/api/earthquakes/retrieve").reply( 201, earthquakes );
 
         const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
