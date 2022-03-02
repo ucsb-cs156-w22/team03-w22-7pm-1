@@ -108,14 +108,15 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
             </Nav>
+
             <Nav className="mr-auto">
               {
                 hasRole(currentUser, "ROLE_USER") && (
-                  <NavDropdown title="Earthquakes" id="appnavbar-earthquakes-dropdown" data-testid="appnavbar-earthquakes-dropdown" >
-                    <NavDropdown.Item href="/earthquakes/list" data-testid="appnavbar-earthquakes-list">List</NavDropdown.Item>
+                  <NavDropdown title="CollegiateSubreddits" id="appnavbar-collegiatesubreddits-dropdown" data-testid="appnavbar-collegiatesubreddits-dropdown" >
+                    <NavDropdown.Item href="/collegiatesubreddits/list" data-testid="appnavbar-collegiatesubreddits-list">List</NavDropdown.Item>
                     {
                       hasRole(currentUser, "ROLE_ADMIN") && (
-                        <NavDropdown.Item href="/earthquakes/retrieve" data-testid="appnavbar-earthquakes-retrieve">Retrieve</NavDropdown.Item>
+                        <NavDropdown.Item href="/collegiatesubreddits/create" data-testid="appnavbar-collegiatesubreddits-create">Create</NavDropdown.Item>
                       )
                     }
                   </NavDropdown>
