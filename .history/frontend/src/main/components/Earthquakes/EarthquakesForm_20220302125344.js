@@ -76,4 +76,3 @@ function EarthquakesForm({ initialEarthquakes, submitAction, buttonLabel="Retrie
 }
 
 export default EarthquakesForm;
-

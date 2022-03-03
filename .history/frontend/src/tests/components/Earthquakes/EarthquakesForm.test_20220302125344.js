@@ -107,4 +107,3 @@ describe("EarthquakesForm tests", () => {
 });
 
 
-
