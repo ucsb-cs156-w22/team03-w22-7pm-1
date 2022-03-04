@@ -117,21 +117,6 @@ function App() {
             </> 
           )
         }
-        {
-          hasRole(currentUser, "ROLE_USER") && (
-            <>
-              <Route exact path="/earthquakes/list" element={<EarthquakesIndexPage />} />
-            </>
-          )
-        }
-        {
-          hasRole(currentUser, "ROLE_ADMIN") && (
-            <>
-
-              <Route exact path="/earthquakes/retrieve" element={<EarthquakesRetrievePage />} />
-            </>
-          )
-        }
 
       </Routes>
     </BrowserRouter>
